@@ -41,10 +41,15 @@ begin
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
+var DlgStatus : TModalResult;
 begin
   PickedColor := $FF11FF;
-  if (pb_init <= 0) then
-     halt;
+  while (pb_init <= 0) do
+     begin
+       DlgStatus := MessageDlg('Plumbob is not connected!',mtWarning,mbAbortRetryIgnore,0);
+       if DlgStatus <> mrRetry then
+         halt;
+     end;
 end;
 
 end.
